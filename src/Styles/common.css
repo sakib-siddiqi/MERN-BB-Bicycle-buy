@@ -1,0 +1,29 @@
+/* letter spacing */
+.ls-1 {
+  letter-spacing: 0.05em;
+}
+.ls-2 {
+  letter-spacing: 0.1em;
+}
+.ls-3 {
+  letter-spacing: 0.15em;
+}
+/* font weight */
+.fw-sm {
+  font-weight: 500 !important;
+}
+.fw-md {
+  font-weight: 600 !important;
+}
+.fw-bold {
+  font-weight: 700 !important;
+}
+/* text */
+.text-secondary {
+  color: rgb(var(--dark), 0.6) !important;
+}
+/* background */
+.bg-glass {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(10px) !important;
+}

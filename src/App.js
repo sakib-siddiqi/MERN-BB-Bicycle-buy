@@ -1,15 +1,57 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
+import Home from "./Pages/Home/Home";
 function App() {
   return (
-    <div className="App">
-      <div className="App-header">
-        <h1 className="display-1 fw-bold">react.js </h1>
-        <h4 className="fw-light">Sakib Siddiqi Supto</h4>
-        <p className="text-primary h6 fw-light">sakibsiddiqi15@gmail.com</p>
-        <p className="text-primary h6 fw-light">sakibsiddiqisupto@gmail.com</p>
-      </div>
-    </div>
+    <main>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </BrowserRouter>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+      <h1 className="display-1">hello</h1>
+    </main>
   );
 }
 export default App;

@@ -1,0 +1,14 @@
+@import url("../../../Styles//root.css");
+.BBTitle {
+  position: relative;
+  display: inline-block;
+}
+.BBTitle::after {
+  position: absolute;
+  width: 50%;
+  height: 5px;
+  bottom: -15%;
+  left: 0;
+  content: "";
+  background: rgb(var(--blue));
+}

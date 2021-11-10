@@ -1,0 +1,11 @@
+.my-btn {
+  border: none;
+  outline: 0;
+  outline-offset: 2px;
+  background: rgb(var(--dark));
+  color: rgb(var(--white));
+  transition: all 0.2s;
+}
+.my-btn:hover:focus {
+  outline: 2px solid rgb(var(--dark), 0.8);
+}

@@ -17,11 +17,11 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link className="px-3 mx-0 mx-md-2" href="#home">
+            <Nav.Link as={NavLink} exact className="px-3 mx-0 mx-md-2" to="/">
               Home
             </Nav.Link>
-            <Nav.Link className="px-3 mx-0 mx-md-2" href="#link">
-              Link
+            <Nav.Link as={NavLink} className="px-3 mx-0 mx-md-2" to="/shop">
+              Shop
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

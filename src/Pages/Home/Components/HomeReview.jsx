@@ -3,10 +3,14 @@ import { Col, Row, Carousel, Card } from "react-bootstrap";
 import Section from "../../../Shared/Components/Section/Section";
 import image from "../../../images/review.png";
 import Text from "../../../Shared/Components/Text/Text";
+import BBTitle from "../../../Shared/Components/BBTitle/BBTitle";
 const HomeReview = () => {
   return (
-    <Section id="home-overview" className="vh-100 center">
-      <Row xs={1} md={2} className="g-4 center">
+    <Section id="home-review" className="vh-min-100 my-5 center">
+      <div className="text-center">
+        <BBTitle>REVIEW</BBTitle>
+      </div>
+      <Row xs={1} md={2} className="g-4 ">
         <Col>
           <img src={image} alt="review" className="img-fluid outlineed-img" />
         </Col>

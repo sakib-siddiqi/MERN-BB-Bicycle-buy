@@ -6,8 +6,8 @@ import overview from "../../../images/over-view.png";
 import ButtonA from "../../../Shared/Components/Buttons/ButtonA";
 const HomeOverview = () => {
   return (
-    <Section id="home-overview" className="vh-100 center">
-      <Row xs={1} className="g-4">
+    <Section id="home-overview" className="vh-min-100 my-5 center">
+      <Row xs={1} className="g-4 mt-5">
         <Col md={8}>
           <div className="mt-3 mt-md-4 mt-lg-5">
             <div className="display-4 fw-bold">RIde With Your Bicycle.</div>

@@ -6,7 +6,7 @@ import ProductCard from "../../Shop/ProductCard";
 
 const HomeShop = () => {
   return (
-    <Section className="vh-min-100 center">
+    <Section className="vh-min-100 my-5 center">
       <div className="center mb-5">
         <BBTitle>Shop</BBTitle>
       </div>

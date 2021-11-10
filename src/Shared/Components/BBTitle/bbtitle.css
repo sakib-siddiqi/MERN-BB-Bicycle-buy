@@ -10,5 +10,5 @@
   bottom: -15%;
   left: 0;
   content: "";
-  background: rgb(var(--blue));
+  background: rgb(var(--dark));
 }

@@ -9,3 +9,8 @@
   outline: 2px solid #00000020;
   outline-offset: 2px;
 }
+/* card */
+.product-card {
+  background: rgba(var(--dark), 0.04);
+  border-radius: 0px !important;
+}

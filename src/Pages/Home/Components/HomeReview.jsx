@@ -18,7 +18,7 @@ const HomeReview = () => {
           <Carousel fade indicators={false}>
             <Carousel.Item className="py-5">
               <Row>
-                <Col xs={8} md={8} lg={6} className="mx-auto">
+                <Col xs={10} md={8} lg={6} className="mx-auto">
                   <Card className="border-0 carousel-card">
                     <Card.Body className="v-center  justify-content-evenly align-items-start">
                       <Text>

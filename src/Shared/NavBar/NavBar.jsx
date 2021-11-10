@@ -18,7 +18,7 @@ const NavBar = () => {
           <IoGridSharp />
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto  nav-bar-main">
             <Nav.Link
               as={NavLink}
               exact
@@ -33,6 +33,13 @@ const NavBar = () => {
               to="/shop"
             >
               Shop
+            </Nav.Link>
+            <Nav.Link
+              as={NavLink}
+              className="px-3 fw-sm mx-0 mx-md-2 my-2 my-md-0"
+              to="/dashboard"
+            >
+              Dashboard
             </Nav.Link>
             <Nav.Link
               id="buttonC"

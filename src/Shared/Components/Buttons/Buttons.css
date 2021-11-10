@@ -29,3 +29,13 @@
   outline: 2px solid #b276ff;
   outline-offset: 2px;
 }
+/* ---- */
+/* btn */
+.btn-red {
+  background: linear-gradient(45deg, #ff004c, #ff1b67);
+  color: white;
+  outline-offset: 1px;
+}
+.btn-red:hover {
+  outline: 2px solid #ffffff;
+}

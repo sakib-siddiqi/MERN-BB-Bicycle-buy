@@ -16,12 +16,12 @@ const HomeReview = () => {
               <Row>
                 <Col xs={8} md={8} lg={6} className="mx-auto">
                   <Card className="border-0 carousel-card">
-                    <Card.Body className="as-1 v-center  justify-content-evenly align-items-start">
+                    <Card.Body className="v-center  justify-content-evenly align-items-start">
                       <Text>
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Impedit mollitia soluta voluptas sunt, sapiente
                         modi beatae dignissimos, obcaecati dolore dolores quas
-                        asperiores aperiam itaque deserunt?{" "}
+                        asperiores aperiam itaque deserunt?
                       </Text>
                       <Card.Title className="text-muted">Kabir sing</Card.Title>
                     </Card.Body>

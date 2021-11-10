@@ -9,11 +9,11 @@ const Footer = () => {
     <footer style={{ background: "#000" }}>
       <Container className="py-4 text-light">
         <Row xs={1} md={2} lg={3}>
-          <Col>
+          <Col className="mt-4 mt-md-0">
             <h1 className="text-light fw-bold">B.B</h1>
             <p className="ls-1">Bicycle Buy.</p>
           </Col>
-          <Col>
+          <Col className="mt-4 mt-md-0">
             <h3 className="text-light fw-bold">Contact Us</h3>
             <div className="mt-3">
               <p className="text-light mb-2">
@@ -26,7 +26,7 @@ const Footer = () => {
               </p>
             </div>
           </Col>
-          <Col>
+          <Col className="mt-4 mt-md-0">
             <h3 className="text-light fw-bold">About Us</h3>
             <Row className="g-2 mt-3">
               <Col className=" flex-grow-0">

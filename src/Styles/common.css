@@ -8,6 +8,7 @@
 .ls-3 {
   letter-spacing: 0.15em;
 }
+
 /* font weight */
 .fw-sm {
   font-weight: 500 !important;
@@ -18,12 +19,26 @@
 .fw-bold {
   font-weight: 700 !important;
 }
+
 /* text */
 .text-secondary {
   color: rgb(var(--dark), 0.6) !important;
 }
+
 /* background */
 .bg-glass {
   background: rgba(255, 255, 255, 0.25) !important;
   backdrop-filter: blur(10px) !important;
+}
+/* flex */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.v-center {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }

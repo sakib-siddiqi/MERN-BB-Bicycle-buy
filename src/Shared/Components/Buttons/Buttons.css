@@ -1,11 +1,22 @@
 .my-btn {
   border: none;
-  outline: 0;
+  outline: none;
   outline-offset: 2px;
   background: rgb(var(--dark));
   color: rgb(var(--white));
   transition: all 0.2s;
 }
-.my-btn:hover:focus {
-  outline: 2px solid rgb(var(--dark), 0.8);
+.my-btn:hover {
+  border: none;
+  outline: none;
+}
+.my-btn:focus {
+  outline: 2px solid rgb(var(--dark));
+}
+#buttonB {
+  background: linear-gradient(180deg, #3a3a3a 0%, #212122 50.52%, #282828 100%);
+  border: none;
+}
+#buttonB:focus {
+  outline: 2px solid rgb(var(--white), 0.2);
 }

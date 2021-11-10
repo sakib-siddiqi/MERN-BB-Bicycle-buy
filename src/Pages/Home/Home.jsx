@@ -1,10 +1,11 @@
 import React from "react";
 import Page from "../../Shared/Page/Page";
-import { Container } from "react-bootstrap";
+import HomeBanner from "./Components/HomeBanner";
+import "./home.css";
 const Home = () => {
   return (
     <Page>
-      <Container></Container>
+      <HomeBanner />
     </Page>
   );
 };

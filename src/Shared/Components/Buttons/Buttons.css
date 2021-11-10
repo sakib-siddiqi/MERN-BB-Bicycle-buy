@@ -20,12 +20,12 @@
 #buttonB:focus {
   outline: 2px solid rgb(var(--white), 0.2);
 }
-#button3D {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, #000000 100%);
-  box-shadow: 0px 6px 0px #000000;
+#buttonC {
+  background: linear-gradient(85.23deg, #a259ff 0%, #b276ff 100%) !important;
   color: white;
-  border-radius: 5px;
+  letter-spacing: 00.05em !important;
 }
-#button3D.active {
-  box-shadow: 0px 3px 0px #000000 !important;
+#buttonC:focus:hover {
+  outline: 2px solid #b276ff;
+  outline-offset: 2px;
 }

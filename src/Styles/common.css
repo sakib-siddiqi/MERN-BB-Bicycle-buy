@@ -58,3 +58,39 @@
   outline: 2px solid rgba(var(--dark), 0.2);
   outline-offset: 3px;
 }
+/* color */
+.text-blue {
+  color: rgb(var(--blue));
+}
+/* hoverBlueOutline */
+.hoverBlueOutline {
+  outline-offset: 3px;
+  outline: 2px solid rgba(var(--blue), 0.1);
+  transition: all 0.2s;
+}
+.hoverBlueOutline:hover {
+  outline: 3px solid rgb(var(--blue));
+  outline-offset: 5px;
+}
+/* form */
+.input-outlined {
+  outline: 1px solid rgba(var(--blue), 0.2);
+  outline-offset: 1px;
+  transition: all 0.2s;
+}
+.input-outlined:hover {
+  outline: 1px solid rgba(var(--blue), 0.4);
+  outline-offset: 2px;
+}
+.input-outlined:focus {
+  box-shadow: none !important;
+  outline: 2px solid rgb(var(--blue));
+  outline-offset: 3px;
+}
+.input-outlined:active {
+  box-shadow: none !important;
+}
+/* cursor */
+.c-pointer {
+  cursor: pointer;
+}

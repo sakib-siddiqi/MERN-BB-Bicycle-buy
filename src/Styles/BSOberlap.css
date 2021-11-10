@@ -14,3 +14,22 @@
   background: rgba(var(--dark), 0.04);
   border-radius: 0px !important;
 }
+/* carousel-card */
+.carousel-card {
+  border-radius: 15px;
+  box-shadow: 0px 20px 60px rgba(172, 185, 210, 0.2);
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background: #bc93ff;
+  padding: 0.5rem;
+  border-radius: 1000px;
+  outline: 2px solid #6200ff73;
+  outline-offset: 2px;
+  transition: all 0.3s;
+}
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  outline: 4px solid #bc93ff73;
+  outline-offset: 6px;
+}

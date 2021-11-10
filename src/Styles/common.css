@@ -46,3 +46,15 @@
 .vh-min-100 {
   min-height: 100vh;
 }
+/* aspect ration */
+.as-1 {
+  aspect-ratio: 1;
+}
+.as-16 {
+  aspect-ratio: 16/9;
+}
+/* outlined img */
+.outlineed-img {
+  outline: 2px solid rgba(var(--dark), 0.2);
+  outline-offset: 3px;
+}

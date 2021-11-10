@@ -11,6 +11,7 @@ All CSS import
 */
 @import url("./Styles/common.css");
 @import url("./Shared/Components/Buttons/Buttons.css");
+@import url("./Styles/BSOberlap.css");
 /**
 __ CSS for all
 */

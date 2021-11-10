@@ -10,7 +10,7 @@
   border: none;
   outline: none;
 }
-.my-btn:focus {
+.my-btn:focus:hover {
   outline: 2px solid rgb(var(--dark));
 }
 #buttonB {
@@ -19,4 +19,13 @@
 }
 #buttonB:focus {
   outline: 2px solid rgb(var(--white), 0.2);
+}
+#button3D {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, #000000 100%);
+  box-shadow: 0px 6px 0px #000000;
+  color: white;
+  border-radius: 5px;
+}
+#button3D.active {
+  box-shadow: 0px 3px 0px #000000 !important;
 }

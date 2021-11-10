@@ -1,0 +1,11 @@
+.nav-link {
+  background: #eeeeee60 !important;
+  font-weight: 600;
+  color: rgb(var(--dark));
+  border-radius: 0.5em;
+}
+.nav-link.active {
+  background: #eeeeee !important;
+  outline: 2px solid #00000020;
+  outline-offset: 2px;
+}

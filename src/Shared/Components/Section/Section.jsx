@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 const Section = ({ children, className, ...rest }) => {
   return (
-    <section {...rest} className={`my-5 ${className}`}>
+    <section {...rest} className={`${className}`}>
       <Container>{children}</Container>
     </section>
   );

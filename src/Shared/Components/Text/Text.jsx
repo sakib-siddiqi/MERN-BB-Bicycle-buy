@@ -1,7 +1,11 @@
 import React from "react";
 
-const Text = ({ children }) => {
-  return <p className="text-secondary lh-base">{children}</p>;
+const Text = ({ children, className, ...rest }) => {
+  return (
+    <p {...rest} className={`text-secondary lh-base ${className}`}>
+      {children}
+    </p>
+  );
 };
 
 export default Text;

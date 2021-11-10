@@ -10,47 +10,6 @@ function App() {
           <Route exact path="/" component={Home} />
         </Switch>
       </BrowserRouter>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
-      <h1 className="display-1">hello</h1>
     </main>
   );
 }

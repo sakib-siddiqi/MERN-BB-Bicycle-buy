@@ -16,17 +16,16 @@ const CardSkaleton = () => {
     );
 };
 
-const LoginSignSkeleton = () => {
+const LoginSignSkeleton = ({ item }) => {
     return (
         <Card.Body>
-            <div className="mb-3">
-                <Skeleton height={30} width="35%" className="mb-1" />
-                <Skeleton height={50} />
-            </div>
-            <div className="mb-3">
-                <Skeleton height={30} width="35%" className="mb-1" />
-                <Skeleton height={50} />
-            </div>
+            {[...Array(item)].map((e, i) => (
+                <div className="mb-3" key={i}>
+                    <Skeleton height={30} width="35%" className="mb-1" />
+                    <Skeleton height={50} />
+                </div>
+            ))}
+            <Skeleton height={40} width="40%" className="mt-2" baseColor="#0000ff10" />
         </Card.Body>
     );
 };

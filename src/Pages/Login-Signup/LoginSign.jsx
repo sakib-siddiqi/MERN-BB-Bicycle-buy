@@ -5,14 +5,15 @@ import useAuth from "../../Hooks/Firebase/useAuth";
 import ButtonC from "../../Shared/Components/Buttons/ButtonC";
 import Section from "../../Shared/Components/Section/Section";
 import Page from "../../Shared/Page/Page";
+import { LoginSignSkeleton } from "../../Shared/Skelaton/SkeletonLoading";
+import ProfileCard from "./ProfileCard";
 /**
  * *********
  * login from
  * *********
  */
-const Login = ({ toggle }) => {
+const Login = ({ toggle, firebase, handleSignIn, handleSignOut }) => {
 
-  const { firebase, handleSignIn } = useAuth();
 
 
   const {
@@ -28,44 +29,45 @@ const Login = ({ toggle }) => {
     <>
       {
         firebase.loading
-          ? <h1>Loading</h1>
-          : <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="email" className="form-label w-100">
-              <p>Email</p>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                {...register("email", { required: true })}
-                className="input-outlined form-control mb-4"
-              />
-            </label>
-            <label htmlFor="password" className="form-label w-100">
-              <p>Password</p>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                {...register("password", { required: true })}
-                className="input-outlined form-control mb-4"
-              />
-            </label>
-            {/* errors will return when field validation fails  */}
-            {errors.exampleRequired && (
-              <p className="text-danger">This field is required</p>
-            )}
+          ? <LoginSignSkeleton item={2} />
+          : firebase.user.uid ? <ProfileCard user={firebase.user} handleSignOut={handleSignOut} />
+            : <form onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="email" className="form-label w-100">
+                <p>Email</p>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  {...register("email", { required: true })}
+                  className="input-outlined form-control mb-4"
+                />
+              </label>
+              <label htmlFor="password" className="form-label w-100">
+                <p>Password</p>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  {...register("password", { required: true })}
+                  className="input-outlined form-control mb-4"
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.exampleRequired && (
+                <p className="text-danger">This field is required</p>
+              )}
 
-            {firebase.error && (
-              <p className="text-danger">{firebase.error}</p>
-            )}
+              {firebase.error && (
+                <p className="text-danger">{firebase.error}</p>
+              )}
 
-            <ButtonC type="submit" className="mb-4 rounded-3">
-              Login
-            </ButtonC>
-            <p onClick={toggle} className="nav-link c-pointer">
-              New Here?
-            </p>
-          </form>
+              <ButtonC type="submit" className="mb-4 rounded-3">
+                Login
+              </ButtonC>
+              <p onClick={toggle} className="nav-link c-pointer">
+                New Here?
+              </p>
+            </form>
       }
     </>
   );
@@ -75,7 +77,7 @@ const Login = ({ toggle }) => {
  * Signup from
  * *********
  */
-const Signup = ({ toggle }) => {
+const Signup = ({ toggle, firebase, handleSignUp, handleSignOut }) => {
   const [passNotMatch, setPassNotMatch] = useState(false);
   const {
     register,
@@ -85,70 +87,77 @@ const Signup = ({ toggle }) => {
 
   const onSubmit = data => {
     if (data.password === data.re_password) {
-      console.log(data);
+      // handleSignUp(data);
+      console.log(data)
       setPassNotMatch(false);
     } else {
       setPassNotMatch(true);
     }
   };
 
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="name" className="form-label w-100">
-        <p>Name</p>
-        <input
-          type="text"
-          id="name"
-          placeholder="Name"
-          {...register("name", { required: true })}
-          className="input-outlined form-control mb-4"
-        />
-      </label>
-      <label htmlFor="email" className="form-label w-100">
-        <p>Email</p>
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          {...register("email", { required: true })}
-          className="input-outlined form-control mb-4"
-        />
-      </label>
-      <label htmlFor="password" className="form-label w-100">
-        <p>Password</p>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password", { required: true })}
-          className="input-outlined form-control mb-4"
-        />
-      </label>
-      <label htmlFor="re-password" className="form-label w-100">
-        <p>Re-enter Password</p>
-        <input
-          type="password"
-          id="re-password"
-          placeholder="Re-enter Password"
-          {...register("re_password", { required: true })}
-          className="input-outlined form-control mb-4"
-        />
-      </label>
+    <>
+      {
+        firebase.loading
+          ? <LoginSignSkeleton item={2} />
+          : firebase.user.uid ? <ProfileCard user={firebase.user} handleSignOut={handleSignOut} />
+            : <form onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="name" className="form-label w-100">
+                <p>Name</p>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  {...register("name", { required: true })}
+                  className="input-outlined form-control mb-4"
+                />
+              </label>
+              <label htmlFor="email" className="form-label w-100">
+                <p>Email</p>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  {...register("email", { required: true })}
+                  className="input-outlined form-control mb-4"
+                />
+              </label>
+              <label htmlFor="password" className="form-label w-100">
+                <p>Password</p>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  {...register("password", { required: true })}
+                  className="input-outlined form-control mb-4"
+                />
+              </label>
+              <label htmlFor="re-password" className="form-label w-100">
+                <p>Re-enter Password</p>
+                <input
+                  type="password"
+                  id="re-password"
+                  placeholder="Re-enter Password"
+                  {...register("re_password", { required: true })}
+                  className="input-outlined form-control mb-4"
+                />
+              </label>
 
-      {/* errors will return when field validation fails  */}
-      {(errors.name || errors.password || errors.email || errors.re_password) && (
-        <p className="text-danger">This field is required</p>
-      )}
-      {passNotMatch && <p className="text-danger">* Password not matched</p>}
+              {/* errors will return when field validation fails  */}
+              {(errors.name || errors.password || errors.email || errors.re_password) && (
+                <p className="text-danger">This field is required</p>
+              )}
+              {passNotMatch && <p className="text-danger">* Password not matched</p>}
 
-      <ButtonC type="submit" className="mb-4 rounded-3">
-        Signup
-      </ButtonC>
-      <p onClick={toggle} className="nav-link c-pointer">
-        Have an Account?
-      </p>
-    </form>
+              <ButtonC type="submit" className="mb-4 rounded-3">
+                Signup
+              </ButtonC>
+              <p onClick={toggle} className="nav-link c-pointer">
+                Have an Account?
+              </p>
+            </form>}
+    </>
+
   );
 };
 
@@ -158,7 +167,9 @@ const Signup = ({ toggle }) => {
  * +++++++++++
  */
 const LoginSign = () => {
+  const { firebase, handleSignIn, handleSignUp, handleSignOut } = useAuth();
   const [activeLogin, setActiveLogin] = useState(true);
+  console.log(firebase.user)
   return (
     <Page>
       <Section className="vh-min-100 my-5 center">
@@ -169,12 +180,12 @@ const LoginSign = () => {
                 <Card.Body>
                   <h1 className="text-center fw-bold ls-2">B.B</h1>
                   <p className="text-center text-blue fw-sm">
-                    {activeLogin ? "Login" : "Signup"}
+                    {!firebase.user.uid && (activeLogin ? "Login" : "Signup")}
                   </p>
                   {activeLogin ? (
-                    <Login toggle={() => setActiveLogin(false)} />
+                    <Login toggle={() => setActiveLogin(false)} firebase={firebase} handleSignOut={handleSignOut} handleSignIn={handleSignIn} />
                   ) : (
-                    <Signup toggle={() => setActiveLogin(true)} />
+                    <Signup toggle={() => setActiveLogin(true)} firebase={firebase} handleSignOut={handleSignOut} handleSignUp={handleSignUp} />
                   )}
                 </Card.Body>
               </Card>

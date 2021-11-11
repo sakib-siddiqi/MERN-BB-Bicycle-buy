@@ -72,6 +72,10 @@
   outline: 3px solid rgb(var(--blue));
   outline-offset: 5px;
 }
+.outline-1 {
+  outline: 2px solid rgba(var(--blue), 0.5);
+  outline-offset: 2px;
+}
 /* form */
 .input-outlined {
   outline: 1px solid rgba(var(--blue), 0.2);

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { IoGridSharp } from "react-icons/io5";
 const DashBoarNavbar = () => {
   return (
-    <Navbar bg="primary" expand="lg" className="dash-nav-bar">
+    <Navbar bg="primary" expand="lg" className="dash-nav-bar sticky-top">
       <Container>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"

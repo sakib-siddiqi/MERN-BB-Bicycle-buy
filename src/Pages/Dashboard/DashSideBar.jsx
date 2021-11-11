@@ -58,7 +58,7 @@ const DashSideBar = () => {
         </DashMenuItem>
         <DashMenuItem exact to="/dashboard">
           <AiOutlineAppstoreAdd />
-          Add Order
+          Add Product
         </DashMenuItem>
         <DashMenuItem exact to="/dashboard">
           <MdOutlineManageAccounts />

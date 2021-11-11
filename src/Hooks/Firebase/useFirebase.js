@@ -7,11 +7,11 @@ firebaseApp();
 
 const auth = getAuth();
 function useFirebase() {
-
+    const [confirmLogOut, setConfirmLogOut] = useState(false);
     const [user, setUser] = useState({});
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
-
+    const handleConfirmLogout = (state) => setConfirmLogOut(state);
     function updateUserData(name) {
         updateProfile(auth.currentUser, { displayName: name })
             .then((res) => {
@@ -34,6 +34,7 @@ function useFirebase() {
 
     function handleSignIn({ email, password }) {
         setLoading(true);
+        setConfirmLogOut(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((res) => {
                 setUser(res.user);
@@ -70,6 +71,8 @@ function useFirebase() {
 
     return {
         firebase: { user, loading, error },
+        confirmLogOut,
+        handleConfirmLogout,
         handleSignUp,
         handleSignIn,
         handleSignOut,

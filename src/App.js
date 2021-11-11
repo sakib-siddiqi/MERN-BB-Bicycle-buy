@@ -7,6 +7,8 @@ import Home from "./Pages/Home/Home";
 import LoginSign from "./Pages/Login-Signup/LoginSign";
 import Shop from "./Pages/Shop/Shop";
 function App() {
+
+
   return (
     <main>
       <AuthCotext>

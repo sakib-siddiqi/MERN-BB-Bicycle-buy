@@ -7,24 +7,23 @@ firebaseApp();
 
 const auth = getAuth();
 function useFirebase() {
-    const [confirmLogOut, setConfirmLogOut] = useState(false);
     const [user, setUser] = useState({});
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
-    const handleConfirmLogout = (state) => setConfirmLogOut(state);
-    function updateUserData(name) {
+    function updateUserData(name, redirect) {
         updateProfile(auth.currentUser, { displayName: name })
             .then((res) => {
                 setUser(res.user);
+                redirect();
             }).catch((err) => setError(err.code));
     }
 
 
-    function handleSignUp({ name, email, password }) {
+    function handleSignUp({ name, email, password }, redirect) {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
-                updateUserData(name);
+                updateUserData(name, redirect);
                 setError("");
             })
             .catch((err) => setError(err.code))
@@ -32,12 +31,12 @@ function useFirebase() {
     }
 
 
-    function handleSignIn({ email, password }) {
+    function handleSignIn({ email, password }, redirect) {
         setLoading(true);
-        setConfirmLogOut(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((res) => {
                 setUser(res.user);
+                redirect();
                 setError("");
             })
             .catch((err) => setError(err.code))
@@ -71,8 +70,6 @@ function useFirebase() {
 
     return {
         firebase: { user, loading, error },
-        confirmLogOut,
-        handleConfirmLogout,
         handleSignUp,
         handleSignIn,
         handleSignOut,

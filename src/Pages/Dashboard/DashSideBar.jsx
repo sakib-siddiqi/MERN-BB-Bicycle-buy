@@ -10,6 +10,7 @@ import {
 import { RiWallet3Fill, RiListUnordered } from "react-icons/ri";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import confirmIt from "../../Shared/Components/Alart_Confirm/confirmIt";
 
 const DashMenuItem = ({ children, to, ...rest }) => {
   return (
@@ -32,7 +33,7 @@ const DashMenuItem = ({ children, to, ...rest }) => {
 /**
  *
  */
-const DashSideBar = () => {
+const DashSideBar = ({ handleSignOut }) => {
   return (
     <>
       <Nav className="dash-nav">
@@ -69,7 +70,15 @@ const DashSideBar = () => {
           Manage Products
         </DashMenuItem>
       </Nav>
-      <Nav.Item className="w-100 my-2">
+      <Nav.Item
+        className="w-100 my-2"
+        onClick={() =>
+          confirmIt(handleSignOut, {
+            text: "You will be Logged Out !",
+            confirmButtonText: "Log Out",
+          })
+        }
+      >
         <Button className="w-100 rounded-3 btn-red">
           <span className="d-none d-md-inline-block">Logout</span>
           <IoMdLogOut className="h5 ms-0 ms-md-2 mb-0" />

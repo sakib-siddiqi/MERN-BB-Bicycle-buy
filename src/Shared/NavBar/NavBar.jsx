@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { IoGridSharp } from "react-icons/io5";
-import { RiLogoutCircleRFill } from "react-icons/ri"
+import { RiLogoutCircleRFill } from "react-icons/ri";
 import useAuth from "../../Hooks/Firebase/useAuth";
 import confirmIt from "../Components/Alart_Confirm/confirmIt";
 
@@ -15,12 +15,10 @@ const NavItem = ({ children, ...rest }) => {
     >
       {children}
     </Nav.Link>
-  )
-}
-
+  );
+};
 
 const NavBar = () => {
-
   const { firebase, handleSignOut } = useAuth();
 
   const btnClasses = "px-3 fw-sm mx-0 mx-md-2 my-2 my-md-0 btn-blue center";
@@ -41,20 +39,39 @@ const NavBar = () => {
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto  nav-bar-main">
-            <NavItem as={NavLink} exact to="/"> Home </NavItem>
-            <NavItem as={NavLink} to="/shop"> Shop </NavItem>
-            <NavItem as={NavLink} to="/dashboard"> Dashboard </NavItem>
+            <NavItem as={NavLink} exact to="/">
+              Home
+            </NavItem>
+            <NavItem as={NavLink} to="/shop">
+              Shop
+            </NavItem>
+            <NavItem as={NavLink} to="/dashboard">
+              Dashboard
+            </NavItem>
 
-            {
-              firebase.user.uid ?
-                <Nav.Link id="buttonC" className={btnClasses} onClick={() => confirmIt(handleSignOut)}>
-                  <RiLogoutCircleRFill />
-                </Nav.Link>
-                : <Nav.Link id="buttonC" as={NavLink} className={btnClasses} to="/login-signup">
-                  Login
-                </Nav.Link>
-            }
-
+            {firebase.user.uid ? (
+              <Nav.Link
+                id="buttonC"
+                className={btnClasses}
+                onClick={() =>
+                  confirmIt(handleSignOut, {
+                    text: "You will be logged out !",
+                    confirmButtonText: "Log Out",
+                  })
+                }
+              >
+                <RiLogoutCircleRFill />
+              </Nav.Link>
+            ) : (
+              <Nav.Link
+                id="buttonC"
+                as={NavLink}
+                className={btnClasses}
+                to="/login-signup"
+              >
+                Login
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

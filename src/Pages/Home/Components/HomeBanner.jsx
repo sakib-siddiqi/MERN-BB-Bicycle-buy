@@ -4,8 +4,8 @@ import ButtonB from "../../../Shared/Components/Buttons/ButtonB";
 const HomeBanner = () => {
   return (
     <header id="home-header">
-      <Container className="v-center align-items-center align-items-md-end  vh-min-100">
-        <h1 className="display-1 fw-bold text-white mb-3">Bicycle Buy</h1>
+      <Container className="center flex-column vh-min-100">
+        <h1 className="display-1 fw-bold text-white mb-4">Bicycle Buy</h1>
         <ButtonB className="px-5">B.B Tour</ButtonB>
       </Container>
     </header>

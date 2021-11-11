@@ -31,7 +31,7 @@ const AddProduct = () => {
                                             id="product-name"
                                             placeholder="Product Title"
                                             className="input-outlined form-control mb-4"
-                                            {...register("name", { required: true })}
+                                            {...register("product-name", { required: true })}
                                         />
                                     </label>
                                     <label htmlFor="product-details" className="form-label w-100">

@@ -11,13 +11,13 @@ import { RiWallet3Fill, RiListUnordered } from "react-icons/ri";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { MdOutlineManageAccounts } from "react-icons/md";
 
-const DashMenuItem = ({ children, ...rest }) => {
-  console.log(children);
+const DashMenuItem = ({ children, to, ...rest }) => {
   return (
     <Nav.Item className="w-100 my-2 bg-glass">
       <Nav.Link
         as={NavLink}
         {...rest}
+        to={to}
         className="d-block rounded-1 d-flex justify-content-center justify-content-md-start align-items-center flex-wrap"
       >
         {children[0]}
@@ -43,28 +43,28 @@ const DashSideBar = () => {
           <BsCartCheckFill />
           My Orders
         </DashMenuItem>
-        <DashMenuItem exact to="/dashboard">
+        <DashMenuItem to="/dashboard/review">
           <BsPencilSquare />
           Review
         </DashMenuItem>
-        <DashMenuItem exact to="/dashboard">
+        <DashMenuItem to="/dashboard/payment">
           <RiWallet3Fill />
-          Pay
+          Payment
         </DashMenuItem>
         {/* ---------------------------------- */}
         <DashMenuItem exact to="/dashboard">
           <RiListUnordered />
           All Orders
         </DashMenuItem>
-        <DashMenuItem exact to="/dashboard">
+        <DashMenuItem exact to="/dashboard/admin/add-product">
           <AiOutlineAppstoreAdd />
           Add Product
         </DashMenuItem>
-        <DashMenuItem exact to="/dashboard">
+        <DashMenuItem exact to="/dashboard/admin/users">
           <MdOutlineManageAccounts />
-          Admins
+          Users
         </DashMenuItem>
-        <DashMenuItem exact to="/dashboard">
+        <DashMenuItem exact to="/dashboard/admin/products">
           <BsGrid3X3GapFill />
           Manage Products
         </DashMenuItem>

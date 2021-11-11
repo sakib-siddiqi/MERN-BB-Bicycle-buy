@@ -1,5 +1,9 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
+import firebaseApp from "./firebase.config";
+
+// Firebase App initializing
+firebaseApp();
 
 const auth = getAuth();
 function useFirebase() {
@@ -16,7 +20,7 @@ function useFirebase() {
     }
 
 
-    function signUp({ name, email, password }) {
+    function handleSignUp({ name, email, password }) {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
@@ -28,12 +32,24 @@ function useFirebase() {
     }
 
 
-    function signIn({ email, password }) {
+    function handleSignIn({ email, password }) {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((res) => {
                 setUser(res.user);
                 setError("");
+            })
+            .catch((err) => setError(err.code))
+            .finally(() => setLoading(false));
+    };
+
+
+    function handleSignOut() {
+        setLoading(true);
+        signOut(auth)
+            .then(() => {
+                setUser({});
+                setError('')
             })
             .catch((err) => setError(err.code))
             .finally(() => setLoading(false));
@@ -54,8 +70,9 @@ function useFirebase() {
 
     return {
         firebase: { user, loading, error },
-        signUp,
-        signIn
+        handleSignUp,
+        handleSignIn,
+        handleSignOut,
     }
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import useAuth from "../../Hooks/Firebase/useAuth";
 import ButtonC from "../../Shared/Components/Buttons/ButtonC";
 import Section from "../../Shared/Components/Section/Section";
 import Page from "../../Shared/Page/Page";
@@ -10,46 +11,63 @@ import Page from "../../Shared/Page/Page";
  * *********
  */
 const Login = ({ toggle }) => {
+
+  const { firebase, handleSignIn } = useAuth();
+
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="email" className="form-label w-100">
-        <p>Email</p>
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          {...register("email", { required: true })}
-          className="input-outlined form-control mb-4"
-        />
-      </label>
-      <label htmlFor="password" className="form-label w-100">
-        <p>Password</p>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password", { required: true })}
-          className="input-outlined form-control mb-4"
-        />
-      </label>
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && (
-        <p className="text-danger">This field is required</p>
-      )}
+  const onSubmit = (data) => { handleSignIn(data); reset(); };
 
-      <ButtonC type="submit" className="mb-4 rounded-3">
-        Login
-      </ButtonC>
-      <p onClick={toggle} className="nav-link c-pointer">
-        New Here?
-      </p>
-    </form>
+
+  return (
+    <>
+      {
+        firebase.loading
+          ? <h1>Loading</h1>
+          : <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="email" className="form-label w-100">
+              <p>Email</p>
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email", { required: true })}
+                className="input-outlined form-control mb-4"
+              />
+            </label>
+            <label htmlFor="password" className="form-label w-100">
+              <p>Password</p>
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                {...register("password", { required: true })}
+                className="input-outlined form-control mb-4"
+              />
+            </label>
+            {/* errors will return when field validation fails  */}
+            {errors.exampleRequired && (
+              <p className="text-danger">This field is required</p>
+            )}
+
+            {firebase.error && (
+              <p className="text-danger">{firebase.error}</p>
+            )}
+
+            <ButtonC type="submit" className="mb-4 rounded-3">
+              Login
+            </ButtonC>
+            <p onClick={toggle} className="nav-link c-pointer">
+              New Here?
+            </p>
+          </form>
+      }
+    </>
   );
 };
 /**
@@ -58,12 +76,23 @@ const Login = ({ toggle }) => {
  * *********
  */
 const Signup = ({ toggle }) => {
+  const [passNotMatch, setPassNotMatch] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log("signup", data);
+
+  const onSubmit = data => {
+    if (data.password === data.re_password) {
+      console.log(data);
+      setPassNotMatch(false);
+    } else {
+      setPassNotMatch(true);
+    }
+  };
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="name" className="form-label w-100">
@@ -102,15 +131,16 @@ const Signup = ({ toggle }) => {
           type="password"
           id="re-password"
           placeholder="Re-enter Password"
-          {...register("re-password", { required: true })}
+          {...register("re_password", { required: true })}
           className="input-outlined form-control mb-4"
         />
       </label>
 
       {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && (
+      {(errors.name || errors.password || errors.email || errors.re_password) && (
         <p className="text-danger">This field is required</p>
       )}
+      {passNotMatch && <p className="text-danger">* Password not matched</p>}
 
       <ButtonC type="submit" className="mb-4 rounded-3">
         Signup

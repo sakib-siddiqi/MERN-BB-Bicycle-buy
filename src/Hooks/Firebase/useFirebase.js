@@ -92,7 +92,7 @@ function useFirebase() {
 
     useEffect(() => {
         setLoading(true);
-        return onAuthStateChanged(auth, (user) => {
+        const AuthChange = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
                 getIdToken(user).then((idToken) => setIdToken(idToken));
@@ -102,6 +102,7 @@ function useFirebase() {
                     .catch((err) => setError(err.code));
             } else { setUser({}) };
             setLoading(false);
+            return AuthChange;
         });
     }, []);
 

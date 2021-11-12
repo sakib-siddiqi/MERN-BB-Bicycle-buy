@@ -25,16 +25,16 @@ function useFirebase() {
     const [user, setUser] = useState({});
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
-
+    const [isAdmin, setIdAdmin] = useState(false);
     /**
      *
      * Database users funcions
      *
      */
 
-    function saveUser( email) {
+    function saveUser(email) {
         axios
-            .post("http://localhost:5000/users", {email, role: "user" })
+            .post("http://localhost:5000/users", { email, role: "user" })
             .then(res => console.log(res))
             .catch(err => console.log(err.code));
     }
@@ -94,15 +94,18 @@ function useFirebase() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-            } else {
-                setUser({});
-            }
-            setLoading(false);
+                setIdAdmin(false);
+                axios(`http://localhost:5000/admins/${user.email}`)
+                    .then(res => setIdAdmin(res.data.isAdmin))
+                    .catch(err => setError(err.code))
+                    .finally(() => setLoading(false));
+            } else setUser({});
+
         });
     }, []);
 
     return {
-        firebase: { user, loading, error },
+        firebase: { user, loading, error, isAdmin },
         handleSignUp,
         handleSignIn,
         handleSignOut,

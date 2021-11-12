@@ -11,23 +11,23 @@ import { SiteSkeleton } from "./Shared/Skelaton/SkeletonLoading";
 function App() {
 
   const { firebase } = useFirebase();
-
+  console.log(firebase.isAdmin);
   return (
     <main>
       {
         firebase.loading ?
           <SiteSkeleton />
-          : 
-            <AuthCotext>
-              <BrowserRouter>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path="/shop" component={Shop} />
-                  <Route path="/login-signup" component={LoginSign} />
-                  <Route path="/dashboard" component={Dashboard} />
-                </Switch>
-              </BrowserRouter>
-            </AuthCotext>
+          :
+          <AuthCotext>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/shop" component={Shop} />
+                <Route path="/login-signup" component={LoginSign} />
+                <Route path="/dashboard" component={Dashboard} />
+              </Switch>
+            </BrowserRouter>
+          </AuthCotext>
       }
     </main>
   );

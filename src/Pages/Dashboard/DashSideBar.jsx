@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { IoMdLogOut } from "react-icons/io";
+import useAuth from "../../Hooks/Firebase/useAuth";
 import {
   BsPencilSquare,
   BsCartCheckFill,
@@ -34,41 +35,48 @@ const DashMenuItem = ({ children, to, ...rest }) => {
  *
  */
 const DashSideBar = ({ handleSignOut }) => {
+  const { firebase } = useAuth();
   return (
     <>
       <Nav className="dash-nav">
         <Nav.Item>
           <h1 className="mb-0 fw-bold text-center text-light">B.B</h1>
         </Nav.Item>
-        <DashMenuItem exact to="/dashboard">
-          <BsCartCheckFill />
-          My Orders
-        </DashMenuItem>
-        <DashMenuItem to="/dashboard/review">
-          <BsPencilSquare />
-          Review
-        </DashMenuItem>
-        <DashMenuItem to="/dashboard/payment">
-          <RiWallet3Fill />
-          Payment
-        </DashMenuItem>
-        {/* ---------------------------------- */}
-        <DashMenuItem exact to="/dashboard">
-          <RiListUnordered />
-          All Orders
-        </DashMenuItem>
-        <DashMenuItem exact to="/dashboard/admin/add-product">
-          <AiOutlineAppstoreAdd />
-          Add Product
-        </DashMenuItem>
-        <DashMenuItem exact to="/dashboard/admin/users">
-          <MdOutlineManageAccounts />
-          Users
-        </DashMenuItem>
-        <DashMenuItem exact to="/dashboard/admin/products">
-          <BsGrid3X3GapFill />
-          Manage Products
-        </DashMenuItem>
+        {!firebase.isAdmin ? (
+          <>
+            <DashMenuItem exact to="/dashboard">
+              <BsCartCheckFill />
+              My Orders
+            </DashMenuItem>
+            <DashMenuItem to="/dashboard/review">
+              <BsPencilSquare />
+              Review
+            </DashMenuItem>
+            <DashMenuItem to="/dashboard/payment">
+              <RiWallet3Fill />
+              Payment
+            </DashMenuItem>
+          </>
+        ) : (
+          <>
+            <DashMenuItem exact to="/dashboard">
+              <RiListUnordered />
+              All Orders
+            </DashMenuItem>
+            <DashMenuItem to="/dashboard/admin/add-product">
+              <AiOutlineAppstoreAdd />
+              Add Product
+            </DashMenuItem>
+            <DashMenuItem to="/dashboard/admin/users">
+              <MdOutlineManageAccounts />
+              Users
+            </DashMenuItem>
+            <DashMenuItem to="/dashboard/admin/products">
+              <BsGrid3X3GapFill />
+              Manage Products
+            </DashMenuItem>
+          </>
+        )}
       </Nav>
       <Nav.Item
         className="w-100 my-2"

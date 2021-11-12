@@ -10,11 +10,12 @@ import AllOrders from "./DashPages/Admin/AllOrders";
 import AddProduct from "./DashPages/Admin/AddProduct";
 import MakeAdmin from "./DashPages/Admin/MakeAdmin";
 import ManageProducts from "./DashPages/Admin/ManageProducts";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import useAuth from "../../Hooks/Firebase/useAuth";
 import UserPrivateRoute from "../../Shared/PrivateRoutes/UserPrivateRoute";
+import AdminPrivateRoute from "../../Shared/PrivateRoutes/AdminPrivateRoute";
 const Dashboard = () => {
-  const { handleSignOut } = useAuth();
+  const { firebase, handleSignOut } = useAuth();
   return (
     <Row className="mx-0">
       <Col
@@ -27,22 +28,39 @@ const Dashboard = () => {
         <DashBoarNavbar />
         <>
           <Switch>
-            <UserPrivateRoute exact path="/dashboard">
-              <MyOrders />
-            </UserPrivateRoute>
-            <UserPrivateRoute path="/dashboard/review">
-              <UserReview />
-            </UserPrivateRoute>
-            <UserPrivateRoute path="/dashboard/payment">
-              <Payment />
-            </UserPrivateRoute>
-            <Route exact path="/dashboard" component={AllOrders} />
-            <Route
-              path="/dashboard/admin/products"
-              component={ManageProducts}
-            />
-            <Route path="/dashboard/admin/add-product" component={AddProduct} />
-            <Route path="/dashboard/admin/users" component={MakeAdmin} />
+            {firebase.isAdmin ? (
+              <>
+                <AdminPrivateRoute
+                  exact
+                  path="/dashboard"
+                  component={AllOrders}
+                />
+                <AdminPrivateRoute
+                  path="/dashboard/admin/products"
+                  component={ManageProducts}
+                />
+                <AdminPrivateRoute
+                  path="/dashboard/admin/add-product"
+                  component={AddProduct}
+                />
+                <AdminPrivateRoute
+                  path="/dashboard/admin/users"
+                  component={MakeAdmin}
+                />
+              </>
+            ) : (
+              <>
+                <UserPrivateRoute exact path="/dashboard">
+                  <MyOrders />
+                </UserPrivateRoute>
+                <UserPrivateRoute path="/dashboard/review">
+                  <UserReview />
+                </UserPrivateRoute>
+                <UserPrivateRoute path="/dashboard/payment">
+                  <Payment />
+                </UserPrivateRoute>
+              </>
+            )}
           </Switch>
         </>
       </Col>

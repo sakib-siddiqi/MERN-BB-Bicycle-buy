@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -25,7 +25,7 @@ const LoginSignSkeleton = ({ item }) => {
                     <Skeleton height={50} />
                 </div>
             ))}
-            <Skeleton height={40} width="40%" className="mt-2" baseColor="#0000ff10" />
+            <Skeleton height={40} width="40%" className="mt-2" highlightColor="#0000ff10" />
         </Card.Body>
     );
 };
@@ -41,5 +41,18 @@ const TableSkeleton = ({ row, col }) => {
         </>
     );
 };
+const SiteSkeleton = ({ row, col }) => {
+    return (
+        <Container>
+            <Skeleton height="10vh" className="mb-1" />
+            <Skeleton height="50vh" className="mb-1" />
+            <Row>
+                <Col><Skeleton height="40vh" className="mb-1"  baseColor="#E6E6E6" highlightColor="#90AACB30" /></Col>
+                <Col><Skeleton height="40vh" className="mb-1"  baseColor="#E6E6E6" highlightColor="#90AACB30" /></Col>
+                <Col><Skeleton height="40vh" className="mb-1"  baseColor="#E6E6E6" highlightColor="#90AACB30" /></Col>
+            </Row>
+        </Container>
+    );
+};
 
-export { CardSkaleton, LoginSignSkeleton, TableSkeleton };
+export { CardSkaleton, LoginSignSkeleton, TableSkeleton,SiteSkeleton };

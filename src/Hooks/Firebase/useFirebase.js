@@ -1,4 +1,12 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
+import axios from "axios";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    onAuthStateChanged,
+    signOut,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
 import firebaseApp from "./firebase.config";
 
@@ -6,30 +14,57 @@ import firebaseApp from "./firebase.config";
 firebaseApp();
 
 const auth = getAuth();
+
+/**
+ *
+ * use Firebase
+ *
+ */
+
 function useFirebase() {
     const [user, setUser] = useState({});
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+
+    /**
+     *
+     * Database users funcions
+     *
+     */
+
+    function saveUser( email) {
+        axios
+            .post("http://localhost:5000/users", {email, role: "user" })
+            .then(res => console.log(res))
+            .catch(err => console.log(err.code));
+    }
+
+
+    /**
+     *
+     * Firebase funcitons
+     *
+     */
     function updateUserData(name, redirect) {
         updateProfile(auth.currentUser, { displayName: name })
             .then((res) => {
                 setUser(res.user);
                 redirect();
-            }).catch((err) => setError(err.code));
+            })
+            .catch((err) => setError(err.code));
     }
-
 
     function handleSignUp({ name, email, password }, redirect) {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {
+            .then((res) => {
                 updateUserData(name, redirect);
+                saveUser(res.user.email);
                 setError("");
             })
             .catch((err) => setError(err.code))
             .finally(() => setLoading(false));
     }
-
 
     function handleSignIn({ email, password }, redirect) {
         setLoading(true);
@@ -41,39 +76,37 @@ function useFirebase() {
             })
             .catch((err) => setError(err.code))
             .finally(() => setLoading(false));
-    };
-
+    }
 
     function handleSignOut() {
         setLoading(true);
         signOut(auth)
             .then(() => {
                 setUser({});
-                setError('')
+                setError("");
             })
             .catch((err) => setError(err.code))
             .finally(() => setLoading(false));
     }
 
-
     useEffect(() => {
-        try {
-            setLoading(true);
-            onAuthStateChanged(auth, (user) => {
-                (user) ? setUser(user) : setUser({});
-            });
-        }
-        catch (err) { setError(err.code) }
-        finally { setLoading(false) }
-    }, [])
-
+        setLoading(true);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser({});
+            }
+            setLoading(false);
+        });
+    }, []);
 
     return {
         firebase: { user, loading, error },
         handleSignUp,
         handleSignIn,
         handleSignOut,
-    }
+    };
 }
 
 export default useFirebase;

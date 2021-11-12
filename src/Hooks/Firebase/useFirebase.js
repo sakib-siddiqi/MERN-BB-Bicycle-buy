@@ -92,16 +92,16 @@ function useFirebase() {
 
     useEffect(() => {
         setLoading(true);
-        onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    setUser(user);
-                    getIdToken(user).then((idToken) => setIdToken(idToken));
-                    setIdAdmin(false);
-                    axios(`http://localhost:5000/admin/${user.email}`)
-                        .then((res) => setIdAdmin(res.data.isAdmin))
-                        .catch((err) => setError(err.code));
-                } else {setUser({})};
-                setLoading(false);
+        return onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+                getIdToken(user).then((idToken) => setIdToken(idToken));
+                setIdAdmin(false);
+                axios(`http://localhost:5000/admin/${user.email}`)
+                    .then((res) => setIdAdmin(res.data.isAdmin))
+                    .catch((err) => setError(err.code));
+            } else { setUser({}) };
+            setLoading(false);
         });
     }, []);
 

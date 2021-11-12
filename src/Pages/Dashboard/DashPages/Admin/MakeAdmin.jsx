@@ -5,22 +5,53 @@ import DashTitle from "../../DashTitle";
 import { RiUserSettingsFill, RiUserFill } from "react-icons/ri";
 import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
 import axios from "axios";
+import useAuth from "../../../../Hooks/Firebase/useAuth";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const MakeAdmin = () => {
-  const [users,setUsers]=useState([]);
-  const [admins,setAdmins]=useState([]);
-  const [error,setError]=useState("");
+  const { firebase } = useAuth();
+  const [users, setUsers] = useState([]);
+  const [admins, setAdmins] = useState([]);
+  const [error, setError] = useState("");
 
-  useEffect(()=>{
-      axios
-          .get("http://localhost:5000/users")
-          .then(res=>setUsers(res.data))
-          .catch(err=>setError(err.code));
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/users")
+      .then((res) => setUsers(res.data))
+      .catch((err) => setError(err.code));
 
-      axios
-          .get("http://localhost:5000/admins")
-          .then(res=>setAdmins(res.data))
-          .catch(err=>setError(err.code));
-  },[])
+    axios
+      .get("http://localhost:5000/admins")
+      .then((res) => setAdmins(res.data))
+      .catch((err) => setError(err.code));
+  }, [admins, users]);
+
+  function handleMakeAdmin(userEmail) {
+    toast.promise(
+      axios.put("http://localhost:5000/users", {
+        idToken: `Bearer ${firebase.idToken}`,
+        email: userEmail,
+      }),
+      {
+        pending: "Loading...",
+        success: `Done`,
+        error: "Ops! Try Again",
+      }
+    );
+  }
+  function handleMakeUser(adminEmail) {
+    toast.promise(
+      axios.put("http://localhost:5000/admins", {
+        idToken: `Bearer ${firebase.idToken}`,
+        email: adminEmail,
+      }),
+      {
+        pending: "Loading...",
+        success: "Done",
+        error: "Ops! Try Again",
+      }
+    );
+  }
 
   return (
     <section>
@@ -45,21 +76,25 @@ const MakeAdmin = () => {
                     </tr>
                   </thead>
                   <tbody>
-                   {
-                     admins.length?(
-                      admins.map((admin,i)=>(
+                    {admins.length ? (
+                      admins.map((admin, i) => (
                         <tr key={i}>
-                        <td>{i+1}</td>
-                        <td>{admin.email}</td>
-                        <td>
-                          <Button variant="primary" size="sm">
-                            Make User
-                          </Button>
-                        </td>
-                      </tr>
-                       ))
-                     ):(<TableSkeleton row={4} col={3}/>)
-                   }
+                          <td>{i + 1}</td>
+                          <td>{admin.email}</td>
+                          <td>
+                            <Button
+                              variant="primary"
+                              size="sm"
+                              onClick={() => handleMakeUser(admin.email)}
+                            >
+                              Make User
+                            </Button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <TableSkeleton row={4} col={3} />
+                    )}
                   </tbody>
                 </Table>
               </Card.Body>
@@ -81,23 +116,25 @@ const MakeAdmin = () => {
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {
-                    users.length?(
-                      users.map((user,i)=>(
+                    {users.length ? (
+                      users.map((user, i) => (
                         <tr key={i}>
                           <td>{i + 1}</td>
                           <td>{user.email}</td>
                           <td>
-                            <Button variant="danger" size="sm">
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() => handleMakeAdmin(user.email)}
+                            >
                               Make Admin
                             </Button>
                           </td>
                         </tr>
                       ))
-                    ):(<TableSkeleton row={4} col={3}/>)
-                  }
-
+                    ) : (
+                      <TableSkeleton row={4} col={3} />
+                    )}
                   </tbody>
                 </Table>
                 {error && <h4 className="text-danger fw-sm ls-1">{error}</h4>}
@@ -105,6 +142,18 @@ const MakeAdmin = () => {
             </Card>
           </Col>
         </Row>
+        <ToastContainer
+        position="bottom-center"
+        theme="dark"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       </DashBoardContent>
     </section>
   );

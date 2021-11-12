@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import AuthCotext from "./Context/AuthCotext";
-import DataContext from "./Context/DataContext";
 import useFirebase from "./Hooks/Firebase/useFirebase";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
@@ -19,7 +18,6 @@ function App() {
         firebase.loading ?
           <SiteSkeleton />
           : 
-          <DataContext>
             <AuthCotext>
               <BrowserRouter>
                 <Switch>
@@ -30,7 +28,6 @@ function App() {
                 </Switch>
               </BrowserRouter>
             </AuthCotext>
-          </DataContext>
       }
     </main>
   );

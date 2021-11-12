@@ -32,11 +32,11 @@ const LoginSignSkeleton = ({ item }) => {
 const TableSkeleton = ({ row, col }) => {
     return (
         <>{[...Array(row)].map((e, i) => (
-            <Row className="mb-3" key={(i)}>
+            <tr className="mb-3" key={(i)}>
                 {[...Array(col)].map((e, i) => (
-                    <Col key={i}> <Skeleton height={30} className="mb-1" /></Col>
+                    <td key={i}> <Skeleton height={30} className="mb-1" /></td>
                 ))}
-            </Row>
+            </tr>
         ))}
         </>
     );

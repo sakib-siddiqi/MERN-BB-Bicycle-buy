@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Button, Table } from "react-bootstrap";
 import DashBoardContent from "../../DashBoardContent";
 import DashTitle from "../../DashTitle";
 import { RiUserSettingsFill, RiUserFill } from "react-icons/ri";
-import useData from "../../../../Hooks/Database/useData";
+import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
+import axios from "axios";
 const MakeAdmin = () => {
-  const { DBData } = useData();
+  const [users,setUsers]=useState([]);
+  const [admins,setAdmins]=useState([]);
+  const [error,setError]=useState("");
+
+  useEffect(()=>{
+      axios
+          .get("http://localhost:5000/users")
+          .then(res=>setUsers(res.data))
+          .catch(err=>setError(err.code));
+
+      axios
+          .get("http://localhost:5000/admins")
+          .then(res=>setAdmins(res.data))
+          .catch(err=>setError(err.code));
+  },[])
 
   return (
     <section>
@@ -25,22 +40,26 @@ const MakeAdmin = () => {
                   <thead>
                     <tr>
                       <th>No.</th>
-                      <th>Name</th>
                       <th>Email</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>
-                        <Button variant="primary" size="sm">
-                          Make User
-                        </Button>
-                      </td>
-                    </tr>
+                   {
+                     admins.length?(
+                      admins.map((admin,i)=>(
+                        <tr key={i}>
+                        <td>{i+1}</td>
+                        <td>{admin.email}</td>
+                        <td>
+                          <Button variant="primary" size="sm">
+                            Make User
+                          </Button>
+                        </td>
+                      </tr>
+                       ))
+                     ):(<TableSkeleton row={4} col={3}/>)
+                   }
                   </tbody>
                 </Table>
               </Card.Body>
@@ -62,19 +81,26 @@ const MakeAdmin = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {DBData.users.map((user, i) => (
-                      <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{user.email}</td>
-                        <td>
-                          <Button variant="danger" size="sm">
-                            Make Admin
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
+                  
+                  {
+                    users.length?(
+                      users.map((user,i)=>(
+                        <tr key={i}>
+                          <td>{i + 1}</td>
+                          <td>{user.email}</td>
+                          <td>
+                            <Button variant="danger" size="sm">
+                              Make Admin
+                            </Button>
+                          </td>
+                        </tr>
+                      ))
+                    ):(<TableSkeleton row={4} col={3}/>)
+                  }
+
                   </tbody>
                 </Table>
+                {error && <h4 className="text-danger fw-sm ls-1">{error}</h4>}
               </Card.Body>
             </Card>
           </Col>

@@ -2,13 +2,13 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import useAuth from "../../Hooks/Firebase/useAuth";
 
-const UserPrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ children, ...rest }) => {
   const { firebase } = useAuth();
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        firebase.user.uid && !firebase.isAdmin ? (
+        firebase.user.uid ? (
           children
         ) : (
           <Redirect
@@ -20,4 +20,4 @@ const UserPrivateRoute = ({ children, ...rest }) => {
   );
 };
 
-export default UserPrivateRoute;
+export default PrivateRoute;

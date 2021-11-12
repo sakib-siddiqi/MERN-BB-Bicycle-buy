@@ -30,23 +30,18 @@ const Dashboard = () => {
           <Switch>
             {firebase.isAdmin ? (
               <>
-                <AdminPrivateRoute
-                  exact
-                  path="/dashboard"
-                  component={AllOrders}
-                />
-                <AdminPrivateRoute
-                  path="/dashboard/admin/products"
-                  component={ManageProducts}
-                />
-                <AdminPrivateRoute
-                  path="/dashboard/admin/add-product"
-                  component={AddProduct}
-                />
-                <AdminPrivateRoute
-                  path="/dashboard/admin/users"
-                  component={MakeAdmin}
-                />
+                <AdminPrivateRoute exact path="/dashboard">
+                  <AllOrders />
+                </AdminPrivateRoute>
+                <AdminPrivateRoute path="/dashboard/admin/products">
+                  <ManageProducts />
+                </AdminPrivateRoute>
+                <AdminPrivateRoute path="/dashboard/admin/add-product">
+                  <AddProduct />
+                </AdminPrivateRoute>
+                <AdminPrivateRoute path="/dashboard/admin/users">
+                  <MakeAdmin />
+                </AdminPrivateRoute>
               </>
             ) : (
               <>

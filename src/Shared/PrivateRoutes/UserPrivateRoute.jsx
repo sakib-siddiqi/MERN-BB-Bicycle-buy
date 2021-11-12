@@ -5,7 +5,9 @@ import useAuth from "../../Hooks/Firebase/useAuth";
 const UserPrivateRoute = ({ children, ...rest }) => {
   const { firebase } = useAuth();
   return (
-    <Route
+    <>
+    {
+     !firebase.loading && <Route
       {...rest}
       render={({ location }) =>
         firebase.user.uid && !firebase.isAdmin ? (
@@ -17,6 +19,8 @@ const UserPrivateRoute = ({ children, ...rest }) => {
         )
       }
     />
+    }
+    </>
   );
 };
 

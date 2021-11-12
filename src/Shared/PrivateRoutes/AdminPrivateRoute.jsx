@@ -5,18 +5,22 @@ import useAuth from "../../Hooks/Firebase/useAuth";
 const AdminPrivateRoute = ({ children, ...rest }) => {
   const { firebase } = useAuth();
   return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        firebase.user.uid && firebase.isAdmin ? (
-          children
-        ) : (
-          <Redirect
-            to={{ pathname: "/login-signup", state: { from: location } }}
-          />
-        )
-      }
-    />
+    <>
+      {!firebase.loading && (
+        <Route
+          {...rest}
+          render={({ location }) =>
+            firebase.user.uid && firebase.isAdmin ? (
+              children
+            ) : (
+              <Redirect
+                to={{ pathname: "/login-signup", state: { from: location } }}
+              />
+            )
+          }
+        />
+      )}
+    </>
   );
 };
 

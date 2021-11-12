@@ -93,7 +93,6 @@ function useFirebase() {
     useEffect(() => {
         setLoading(true);
         onAuthStateChanged(auth, (user) => {
-            try {
                 if (user) {
                     setUser(user);
                     getIdToken(user).then((idToken) => setIdToken(idToken));
@@ -101,10 +100,8 @@ function useFirebase() {
                     axios(`http://localhost:5000/admin/${user.email}`)
                         .then((res) => setIdAdmin(res.data.isAdmin))
                         .catch((err) => setError(err.code));
-                } else setUser({});
-            } finally {
+                } else {setUser({})};
                 setLoading(false);
-            }
         });
     }, []);
 

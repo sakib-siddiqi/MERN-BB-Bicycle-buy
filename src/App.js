@@ -7,28 +7,27 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import LoginSign from "./Pages/Login-Signup/LoginSign";
 import Shop from "./Pages/Shop/Shop";
+import SingleProduct from "./Pages/Shop/SingleProduct";
 import { SiteSkeleton } from "./Shared/Skelaton/SkeletonLoading";
 function App() {
-
   const { firebase } = useFirebase();
-console.log(firebase.isAdmin);
   return (
     <main>
-      {
-        firebase.loading ?
-          <SiteSkeleton />
-          : 
-            <AuthCotext>
-              <BrowserRouter>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path="/shop" component={Shop} />
-                  <Route path="/login-signup" component={LoginSign} />
-                  <Route path="/dashboard" component={Dashboard} />
-                </Switch>
-              </BrowserRouter>
-            </AuthCotext>
-      }
+      {firebase.loading ? (
+        <SiteSkeleton />
+      ) : (
+        <AuthCotext>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/shop" component={Shop} />
+              <Route path="/shop/:id" component={SingleProduct} />
+              <Route path="/login-signup" component={LoginSign} />
+              <Route path="/dashboard" component={Dashboard} />
+            </Switch>
+          </BrowserRouter>
+        </AuthCotext>
+      )}
     </main>
   );
 }

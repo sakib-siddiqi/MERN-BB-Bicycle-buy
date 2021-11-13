@@ -29,8 +29,8 @@ const MakeAdmin = () => {
   function handleMakeAdmin(userEmail) {
     toast.promise(
       axios.put("http://localhost:5000/users", {
-        idToken: `Bearer ${firebase.idToken}`,
-        email: userEmail,
+        data: { email: userEmail },
+        headers: { idToken: `Bearer ${firebase.idToken}` },
       }),
       {
         pending: "Loading...",
@@ -42,8 +42,8 @@ const MakeAdmin = () => {
   function handleMakeUser(adminEmail) {
     toast.promise(
       axios.put("http://localhost:5000/admins", {
-        idToken: `Bearer ${firebase.idToken}`,
-        email: adminEmail,
+        data: { email: adminEmail },
+        headers: { idToken: `Bearer ${firebase.idToken}` },
       }),
       {
         pending: "Loading...",

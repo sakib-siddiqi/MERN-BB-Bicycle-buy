@@ -10,6 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 const AddProduct = () => {
   const { firebase } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -22,8 +23,8 @@ const AddProduct = () => {
     };
     toast.promise(
       axios.post("http://localhost:5000/products", {
-        idToken: `Bearer ${firebase.idToken}`,
-        productData,
+        data: { productData },
+        headers: { idToken: `Bearer ${firebase.idToken}` },
       }),
       {
         pending: "Loading...",

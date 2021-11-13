@@ -1,9 +1,22 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import Page from "../../Shared/Page/Page";
 import PageHeader from "../../Shared/Page/PageHeader";
+import { ProductsSkeleton } from "../../Shared/Skelaton/SkeletonLoading";
 import ProductCard from "./ProductCard";
 const Shop = () => {
+  const [shopProducts, setShopProducts] = useState({});
+  const [error, setError] = useState("");
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/products")
+      .then((res) => {
+        setShopProducts(res.data);
+        setError("");
+      })
+      .catch((err) => setError(err.code));
+  }, []);
   return (
     <Page>
       <PageHeader
@@ -15,31 +28,22 @@ const Shop = () => {
         <p
           className={`text-center fw-md ls-2 text-light bg-glass p-2 rounded-3`}
         >
-          10 Bicycle
+          {shopProducts.count || `...`} Bicycle
         </p>
       </PageHeader>
-
+      {error && <Alert variant="danger">{error}</Alert>}
       <Container className="my-5">
-        <Row xs={1} md={2} lg={3} className="g-4">
-          <Col>
-            <ProductCard />
-          </Col>
-          <Col>
-            <ProductCard />
-          </Col>
-          <Col>
-            <ProductCard />
-          </Col>
-          <Col>
-            <ProductCard />
-          </Col>
-          <Col>
-            <ProductCard />
-          </Col>
-          <Col>
-            <ProductCard />
-          </Col>
-        </Row>
+        {shopProducts?.count ? (
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {shopProducts?.data?.map((productData) => (
+              <Col key={productData._id}>
+                <ProductCard data={productData} />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <ProductsSkeleton count={10} />
+        )}
       </Container>
     </Page>
   );

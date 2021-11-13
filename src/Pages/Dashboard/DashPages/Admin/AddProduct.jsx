@@ -22,7 +22,7 @@ const AddProduct = () => {
       route: data.product_name.split(" ").join("-").toLowerCase(),
     };
     toast.promise(
-      axios.post("http://localhost:5000/products", {
+      axios.post("https://protected-caverns-65051.herokuapp.com/products", {
         data: { productData },
         headers: { idToken: `Bearer ${firebase.idToken}` },
       }),

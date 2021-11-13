@@ -31,7 +31,7 @@ const SingleProduct = () => {
       status: "processing...",
     };
     toast.promise(
-      axios.post("http://localhost:5000/orders", {
+      axios.post("https://protected-caverns-65051.herokuapp.com/orders", {
         data: { orderData },
         headers: { idToken: `Bearer ${firebase.idToken}` },
       }),
@@ -44,7 +44,7 @@ const SingleProduct = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/products/${id}`)
+      .get(`https://protected-caverns-65051.herokuapp.com/products/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => setError(err.code));
   }, [id]);

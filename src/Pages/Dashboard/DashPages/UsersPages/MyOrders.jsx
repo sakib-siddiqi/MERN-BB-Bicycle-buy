@@ -16,7 +16,7 @@ const MyOrders = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/user-orders", {
+      .get("https://protected-caverns-65051.herokuapp.com/user-orders", {
         headers: { idToken: `Bearer ${firebase.idToken}` },
       })
       .then((res) => {
@@ -32,7 +32,7 @@ const MyOrders = () => {
       () => {
         toast
           .promise(
-            axios.delete("http://localhost:5000/orders", {
+            axios.delete("https://protected-caverns-65051.herokuapp.com/orders", {
               data: { orderId },
               headers: { idToken: `Bearer ${firebase.idToken}` },
             }),

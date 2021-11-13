@@ -13,7 +13,7 @@ const ManageProducts = () => {
   const { firebase } = useAuth();
   useEffect(() => {
      axios
-      .get("http://localhost:5000/products")
+      .get("https://protected-caverns-65051.herokuapp.com/products")
       .then((res) => {
         setProducts(res.data);
         setError("");
@@ -24,7 +24,7 @@ const ManageProducts = () => {
   function deleteProduct(id) {
     toast
       .promise(
-        axios.delete("http://localhost:5000/products", {
+        axios.delete("https://protected-caverns-65051.herokuapp.com/products", {
           data: { productId: id },
           headers: { idToken: `Bearer ${firebase.idToken}` },
         }),

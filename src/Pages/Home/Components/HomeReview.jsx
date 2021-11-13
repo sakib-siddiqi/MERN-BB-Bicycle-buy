@@ -5,13 +5,13 @@ import image from "../../../images/review.png";
 import Text from "../../../Shared/Components/Text/Text";
 import BBTitle from "../../../Shared/Components/BBTitle/BBTitle";
 import axios from "axios";
-import Rating from "react-rating";
+import { AiTwotoneStar } from "react-icons/ai";
 const HomeReview = () => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:5000/reviews")
+      .get("https://protected-caverns-65051.herokuapp.com/reviews")
       .then((res) => setReviews(res.data))
       .catch((err) => setError(err.code));
   }, []);
@@ -36,12 +36,13 @@ const HomeReview = () => {
                       <Card className="border-0 carousel-card">
                         <Card.Body className="v-center  justify-content-evenly align-items-start">
                           <Text>{review.review_text}</Text>
-                          <Rating
-                            readonly
-                            initialRating={review.review_star}
-                            placeholderSymbol={<i className="far fa-star"></i>}
-                            fullSymbol={<i className="far fa-star"></i>}
-                          />
+                          <div className="mb-2">
+                          {[...Array(Math.round(review.review_star))].map(
+                            (e, i) => (
+                              <AiTwotoneStar key={i} className="text-warning d-inline" />
+                            )
+                          )}
+                          </div>
                           <Card.Title className="text-muted">
                             {review.reviewer}
                           </Card.Title>

@@ -16,19 +16,19 @@ const MakeAdmin = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users")
+      .get("https://protected-caverns-65051.herokuapp.com/users")
       .then((res) => setUsers(res.data))
       .catch((err) => setError(err.code));
 
     axios
-      .get("http://localhost:5000/admins")
+      .get("https://protected-caverns-65051.herokuapp.com/admins")
       .then((res) => setAdmins(res.data))
       .catch((err) => setError(err.code));
   }, [admins, users]);
 
   function handleMakeAdmin(userEmail) {
     toast.promise(
-      axios.put("http://localhost:5000/users", {
+      axios.put("https://protected-caverns-65051.herokuapp.com/users", {
         data: { email: userEmail },
         headers: { idToken: `Bearer ${firebase.idToken}` },
       }),
@@ -41,7 +41,7 @@ const MakeAdmin = () => {
   }
   function handleMakeUser(adminEmail) {
     toast.promise(
-      axios.put("http://localhost:5000/admins", {
+      axios.put("https://protected-caverns-65051.herokuapp.com/admins", {
         data: { email: adminEmail },
         headers: { idToken: `Bearer ${firebase.idToken}` },
       }),

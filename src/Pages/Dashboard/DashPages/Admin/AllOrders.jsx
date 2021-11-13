@@ -17,7 +17,7 @@ const AllOrders = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/orders", {
+      .get("https://protected-caverns-65051.herokuapp.com/orders", {
         headers: { idToken: `Bearer ${firebase.idToken}` },
       })
       .then((res) => {
@@ -31,7 +31,7 @@ const AllOrders = () => {
   function shipOrder(id) {
     toast
       .promise(
-        axios.put("http://localhost:5000/orders", {
+        axios.put("https://protected-caverns-65051.herokuapp.com/orders", {
           data: { orderId: id },
           headers: { idToken: `Bearer ${firebase.idToken}` },
         }),

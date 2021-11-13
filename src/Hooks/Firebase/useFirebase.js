@@ -36,7 +36,7 @@ function useFirebase() {
 
     function saveUser(email) {
         axios
-            .post("http://localhost:5000/users", { email, role: "user" })
+            .post("https://protected-caverns-65051.herokuapp.com/users", { email, role: "user" })
             .then((res) => console.log(res))
             .catch((err) => console.log(err.code));
     }
@@ -97,7 +97,7 @@ function useFirebase() {
                 setUser(user);
                 getIdToken(user).then((idToken) => setIdToken(idToken));
                 setIdAdmin(false);
-                axios(`http://localhost:5000/admin/${user.email}`)
+                axios(`https://protected-caverns-65051.herokuapp.com/admin/${user.email}`)
                     .then((res) => setIdAdmin(res.data.isAdmin))
                     .catch((err) => setError(err.code));
             } else { setUser({}) };

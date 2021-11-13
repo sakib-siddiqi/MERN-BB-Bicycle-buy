@@ -17,7 +17,7 @@ const UserReview = () => {
   } = useForm();
   const onSubmit = (data) => {
     toast.promise(
-      axios.post("http://localhost:5000/reviews", {
+      axios.post("https://protected-caverns-65051.herokuapp.com/reviews", {
         data: { reviewsData: data },
         headers: { idToken: `Bearer ${firebase.idToken}` },
       }),

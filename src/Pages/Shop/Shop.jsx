@@ -10,7 +10,7 @@ const Shop = () => {
   const [error, setError] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products")
+      .get("https://protected-caverns-65051.herokuapp.com/products")
       .then((res) => {
         setShopProducts(res.data);
         setError("");

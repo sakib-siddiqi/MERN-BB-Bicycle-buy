@@ -6,7 +6,7 @@ import { RiUserSettingsFill, RiUserFill } from "react-icons/ri";
 import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
 import axios from "axios";
 import useAuth from "../../../../Hooks/Firebase/useAuth";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const MakeAdmin = () => {
   const { firebase } = useAuth();
@@ -143,17 +143,17 @@ const MakeAdmin = () => {
           </Col>
         </Row>
         <ToastContainer
-        position="bottom-center"
-        theme="dark"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+          position="bottom-center"
+          theme="dark"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </DashBoardContent>
     </section>
   );

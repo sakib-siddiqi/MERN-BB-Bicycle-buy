@@ -39,7 +39,7 @@ const SingleProduct = () => {
       {
         pending: "Loading...",
         success: `Done`,
-        error: "Ops! Try Again",
+        error: "Only User Can Order",
       }
     );
   };

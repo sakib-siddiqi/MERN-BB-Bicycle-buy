@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Table } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import useAuth from "../../../../Hooks/Firebase/useAuth";
 import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
 import DashBoardContent from "../../DashBoardContent";
@@ -114,19 +114,6 @@ const AllOrders = () => {
             )}
           </tbody>
         </Table>
-        {/* alart */}
-        <ToastContainer
-          position="bottom-center"
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </DashBoardContent>
     </section>
   );

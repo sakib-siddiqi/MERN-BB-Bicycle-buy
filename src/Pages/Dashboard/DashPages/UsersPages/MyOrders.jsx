@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Alert, Table, Button, ToastContainer } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { Alert, Table, Button } from "react-bootstrap";
 import useAuth from "../../../../Hooks/Firebase/useAuth";
 import confirmIt from "../../../../Shared/Components/Alart_Confirm/confirmIt";
 import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
 import DashBoardContent from "../../DashBoardContent";
 import DashTitle from "../../DashTitle";
 /**
- * 
+ *
  * Single user product
- * 
+ *
  */
 const MyOrders = () => {
   const { firebase } = useAuth();
@@ -34,18 +33,11 @@ const MyOrders = () => {
   function cancleOrder(orderId) {
     confirmIt(
       () => {
-        toast
-          .promise(
-            axios.delete("https://protected-caverns-65051.herokuapp.com/orders", {
-              data: { orderId },
-              headers: { idToken: `Bearer ${firebase.idToken}` },
-            }),
-            {
-              pending: "Loading...",
-              success: `Done, refresh the page`,
-              error: "Ops! Try Again",
-            }
-          )
+        axios
+          .delete("https://protected-caverns-65051.herokuapp.com/orders", {
+            data: { orderId },
+            headers: { idToken: `Bearer ${firebase.idToken}` },
+          })
           .then((res) => {
             if (res.data.acknowledged) {
               const existedOrders = myOrders.filter(
@@ -58,7 +50,7 @@ const MyOrders = () => {
       {
         text: "You want to cancle this order?",
         confirmButtonText: "Yes",
-        result: "Order Cancled",
+        final: "Order Cancled",
       }
     );
   }
@@ -73,7 +65,7 @@ const MyOrders = () => {
         <Table striped bordered hover responsive="sm">
           <thead>
             <tr className="table-dark">
-              <th>No.</th>
+              <th>No.</th>  
               <th>Product</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -113,19 +105,6 @@ const MyOrders = () => {
             )}
           </tbody>
         </Table>
-        {/* alart */}
-        <ToastContainer
-          position="bottom-center"
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </DashBoardContent>
     </section>
   );

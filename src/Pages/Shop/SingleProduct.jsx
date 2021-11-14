@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import useAuth from "../../Hooks/Firebase/useAuth";
 import ButtonC from "../../Shared/Components/Buttons/ButtonC";
 import Page from "../../Shared/Page/Page";
@@ -118,19 +118,6 @@ const SingleProduct = () => {
         ) : (
           <SingleProductSkeleton />
         )}
-        {/* alart */}
-        <ToastContainer
-          position="bottom-center"
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </Container>
     </Page>
   );

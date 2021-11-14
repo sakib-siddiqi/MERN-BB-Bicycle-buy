@@ -61,7 +61,7 @@ const NavBar = () => {
                   confirmIt(handleSignOut, {
                     text: "You will be logged out !",
                     confirmButtonText: "Log Out",
-                    result :"Deleted"
+                    final :"Logged Out"
                   })
                 }
               >

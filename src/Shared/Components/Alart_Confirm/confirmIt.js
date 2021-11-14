@@ -13,7 +13,7 @@ function confirmIt(do_it, { text, confirmButtonText, final }) {
     }).then((result) => {
       console.log(result);
       if (result.isConfirmed) {
-        Swal.fire(final, "You will be loged out", "success");
+        Swal.fire( final, "success");
         do_it();
       }
     });

@@ -1,21 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table, Button, Alert } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import useAuth from "../../../../Hooks/Firebase/useAuth";
 import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
 import DashBoardContent from "../../DashBoardContent";
 import DashTitle from "../../DashTitle";
 const ManageProducts = () => {
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
-  const [deleted, setDeleted] = useState(false);
   const { firebase } = useAuth();
   useEffect(() => {
-     axios
+    axios
       .get("https://protected-caverns-65051.herokuapp.com/products")
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data.data);
         setError("");
       })
       .catch((err) => setError(err.code));
@@ -30,13 +29,18 @@ const ManageProducts = () => {
         }),
         {
           pending: "Loading...",
-          success: `Deleted. Refresh the page`,
+          success: `Deleted.`,
           error: "Ops! Try Again",
         }
       )
       .then((res) => {
-        setDeleted(res.data.acknowledged);
-        setError("");
+        if (res.data.acknowledged) {
+          const presentProducts = products.filter(
+            (product) => product._id !== id
+          );
+          setProducts(presentProducts);
+          setError("");
+        }
       })
       .catch((err) => setError(err.code));
   }
@@ -59,21 +63,21 @@ const ManageProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.count ? (
-              products.data.map((product, i) => (
+            {products.length ? (
+              products.map((product, i) => (
                 <tr key={i}>
                   <td>{i + 1}</td>
                   <td>{product._id}</td>
                   <td>{product.product_name}</td>
                   <td>{product.price}</td>
                   <td>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => deleteProduct(product._id)}
-                      >
-                        Delete
-                      </Button>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => deleteProduct(product._id)}
+                    >
+                      Delete
+                    </Button>
                   </td>
                 </tr>
               ))
@@ -82,19 +86,6 @@ const ManageProducts = () => {
             )}
           </tbody>
         </Table>
-        {/* alart */}
-        <ToastContainer
-          position="bottom-center"
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </DashBoardContent>
     </section>
   );

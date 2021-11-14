@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import useAuth from "../../../../Hooks/Firebase/useAuth";
 import ButtonC from "../../../../Shared/Components/Buttons/ButtonC";
 import DashBoardContent from "../../DashBoardContent";
@@ -88,19 +88,6 @@ const UserReview = () => {
             </Card>
           </Col>
         </Row>
-        {/* alart */}
-        <ToastContainer
-          position="bottom-center"
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </DashBoardContent>
     </section>
   );

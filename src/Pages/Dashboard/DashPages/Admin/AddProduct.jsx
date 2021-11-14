@@ -6,7 +6,7 @@ import DashBoardContent from "../../DashBoardContent";
 import DashTitle from "../../DashTitle";
 import useAuth from "../../../../Hooks/Firebase/useAuth";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
   const { firebase } = useAuth();
@@ -102,19 +102,6 @@ const AddProduct = () => {
             </Card>
           </Col>
         </Row>
-        {/* alart */}
-        <ToastContainer
-          position="bottom-center"
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </DashBoardContent>
     </section>
   );

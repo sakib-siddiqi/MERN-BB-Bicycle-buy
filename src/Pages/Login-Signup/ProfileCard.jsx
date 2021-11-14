@@ -15,7 +15,7 @@ const ProfileCard = ({ user, handleSignOut }) => {
           confirmIt(handleSignOut, {
             text: "You will be Logged Out !",
             confirmButtonText: "Log Out",
-            result :"Deleted"
+            final :"Logged Out"
           })
         }
       >

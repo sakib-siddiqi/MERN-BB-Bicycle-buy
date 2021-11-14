@@ -20,7 +20,7 @@ const Dashboard = () => {
     <Row className="mx-0">
       <Col
         xs={2}
-        className="bg-primary px-1 px-md-2 vh-100 sticky-top v-center justify-content-between"
+        className="bg-primary px-1 px-md-2 vh-100 sticky-top v-center justify-content-between align-items-stretch"
       >
         <DashSideBar handleSignOut={handleSignOut} />
       </Col>

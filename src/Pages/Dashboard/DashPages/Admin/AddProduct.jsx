@@ -14,6 +14,7 @@ const AddProduct = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -21,17 +22,19 @@ const AddProduct = () => {
       ...data,
       route: data.product_name.split(" ").join("-").toLowerCase(),
     };
-    toast.promise(
-      axios.post("https://protected-caverns-65051.herokuapp.com/products", {
-        data: { productData },
-        headers: { idToken: `Bearer ${firebase.idToken}` },
-      }),
-      {
-        pending: "Loading...",
-        success: `Done`,
-        error: "Ops! Try Again",
-      }
-    );
+    toast
+      .promise(
+        axios.post("https://protected-caverns-65051.herokuapp.com/products", {
+          data: { productData },
+          headers: { idToken: `Bearer ${firebase.idToken}` },
+        }),
+        {
+          pending: "Loading...",
+          success: `Done`,
+          error: "Ops! Try Again",
+        }
+      )
+      .then((res) => res.data.acknowledged && reset());
   };
   return (
     <section>

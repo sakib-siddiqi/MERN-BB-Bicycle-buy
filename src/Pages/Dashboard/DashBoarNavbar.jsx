@@ -2,7 +2,10 @@ import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { IoGridSharp } from "react-icons/io5";
+import useAuth from "../../Hooks/Firebase/useAuth";
+import { BiUserPin } from "react-icons/bi";
 const DashBoarNavbar = () => {
+  const { firebase } = useAuth();
   return (
     <Navbar bg="primary" expand="lg" className="dash-nav-bar sticky-top">
       <Container>
@@ -29,6 +32,11 @@ const DashBoarNavbar = () => {
             >
               Shop
             </Nav.Link>
+            <Nav.Item className="bg-light rounded-3 text-center">
+              <Nav.Link as={NavLink} to="/login-signup">
+                <BiUserPin /> {firebase.user.displayName}
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>

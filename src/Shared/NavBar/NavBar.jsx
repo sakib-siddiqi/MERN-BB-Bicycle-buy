@@ -5,10 +5,11 @@ import { IoGridSharp } from "react-icons/io5";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useAuth from "../../Hooks/Firebase/useAuth";
 import confirmIt from "../Components/Alart_Confirm/confirmIt";
+import { BiUserPin } from "react-icons/bi";
 /**
- * 
+ *
  * Navbar
- * 
+ *
  */
 const NavItem = ({ children, ...rest }) => {
   return (
@@ -49,24 +50,31 @@ const NavBar = () => {
             <NavItem as={NavLink} to="/shop">
               Shop
             </NavItem>
-            <NavItem as={NavLink} to="/dashboard">
-              Dashboard
-            </NavItem>
 
             {firebase.user.uid ? (
-              <Nav.Link
-                id="buttonC"
-                className={btnClasses}
-                onClick={() =>
-                  confirmIt(handleSignOut, {
-                    text: "You will be logged out !",
-                    confirmButtonText: "Log Out",
-                    final :"Logged Out"
-                  })
-                }
-              >
-                <RiLogoutCircleRFill />
-              </Nav.Link>
+              <>
+                <NavItem as={NavLink} to="/dashboard">
+                  Dashboard
+                </NavItem>
+                <NavItem as={NavLink} to="/login-signup">
+                  <BiUserPin />
+                  {firebase.user.displayName}
+                </NavItem>
+
+                <Nav.Link
+                  id="buttonC"
+                  className={btnClasses}
+                  onClick={() =>
+                    confirmIt(handleSignOut, {
+                      text: "You will be logged out !",
+                      confirmButtonText: "Log Out",
+                      final: "Logged Out",
+                    })
+                  }
+                >
+                  <RiLogoutCircleRFill />
+                </Nav.Link>
+              </>
             ) : (
               <Nav.Link
                 id="buttonC"

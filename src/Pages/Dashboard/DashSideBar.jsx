@@ -11,6 +11,7 @@ import {
 import { RiWallet3Fill, RiListUnordered } from "react-icons/ri";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import { BiUserPin} from "react-icons/bi";
 import confirmIt from "../../Shared/Components/Alart_Confirm/confirmIt";
 
 const DashMenuItem = ({ children, to, ...rest }) => {
@@ -78,21 +79,27 @@ const DashSideBar = ({ handleSignOut }) => {
           </>
         )}
       </Nav>
-      <Nav.Item
-        className="w-100 my-2"
-        onClick={() =>
-          confirmIt(handleSignOut, {
-            text: "You will be Logged Out !",
-            confirmButtonText: "Log Out",
-            final :"Logged Out"
-          })
-        }
-      >
-        <Button className="w-100 rounded-3 btn-red">
-          <span className="d-none d-md-inline-block">Logout</span>
-          <IoMdLogOut className="h5 ms-0 ms-md-2 mb-0" />
-        </Button>
-      </Nav.Item>
+      <div>
+        <DashMenuItem to="/login-signup">
+        <BiUserPin/>
+          {firebase.user.displayName}
+        </DashMenuItem>
+        <Nav.Item
+          className="w-100 my-2"
+          onClick={() =>
+            confirmIt(handleSignOut, {
+              text: "You will be Logged Out !",
+              confirmButtonText: "Log Out",
+              final: "Logged Out",
+            })
+          }
+        >
+          <Button className="w-100 rounded-3 btn-red">
+            <span className="d-none d-md-inline-block">Logout</span>
+            <IoMdLogOut className="h5 ms-0 ms-md-2 mb-0" />
+          </Button>
+        </Nav.Item>
+      </div>
     </>
   );
 };

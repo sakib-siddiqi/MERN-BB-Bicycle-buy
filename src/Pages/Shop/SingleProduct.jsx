@@ -18,6 +18,7 @@ const SingleProduct = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -31,17 +32,19 @@ const SingleProduct = () => {
       date: new Date().toLocaleDateString(),
       status: "processing...",
     };
-    toast.promise(
-      axios.post("https://protected-caverns-65051.herokuapp.com/orders", {
-        data: { orderData },
-        headers: { idToken: `Bearer ${firebase.idToken}` },
-      }),
-      {
-        pending: "Loading...",
-        success: `Done`,
-        error: "Only User Can Order",
-      }
-    );
+    toast
+      .promise(
+        axios.post("https://protected-caverns-65051.herokuapp.com/orders", {
+          data: { orderData },
+          headers: { idToken: `Bearer ${firebase.idToken}` },
+        }),
+        {
+          pending: "Loading...",
+          success: `Done`,
+          error: "Only User Can Order",
+        }
+      )
+      .then((res) => reset());
   };
   useEffect(() => {
     axios
@@ -62,55 +65,59 @@ const SingleProduct = () => {
         </h1>
       </PageHeader>
       <Container className="my-5 ">
-        {
-          product._id?(
-            <Row xs={1} md={2} className="g-4">
-          <Col>
-            <img src={product.img_link} alt={product.route} className="w-100" />
-            <p className="text-secondary mt-3">{product.details}</p>
-            <h3 className="text-dark fw-md">$ {product.price}</h3>
-          </Col>
-          <Col>
-            <Card className="hoverBlueOutline border-0">
-              <Card.Body>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <label htmlFor="address" className="form-label w-100">
-                    <p>Address :</p>
-                    <input
-                      type="text"
-                      id="address"
-                      placeholder="Address"
-                      className="input-outlined form-control mb-4"
-                      {...register("address", { required: true })}
-                    />
-                  </label>
-                  <label htmlFor="quantity" className="form-label w-100">
-                    <p>Qunatity :</p>
-                    <input
-                      type="number"
-                      id="quantity"
-                      min={1}
-                      defaultValue={1}
-                      placeholder="Quantity"
-                      className="input-outlined form-control mb-4"
-                      {...register("quantity", { required: true })}
-                    />
-                  </label>
-                  {/* errors will return when field validation fails  */}
-                  {errors.exampleRequired && (
-                    <p className="text-danger">This field is required</p>
-                  )}
+        {product._id ? (
+          <Row xs={1} md={2} className="g-4">
+            <Col>
+              <img
+                src={product.img_link}
+                alt={product.route}
+                className="w-100"
+              />
+              <p className="text-secondary mt-3">{product.details}</p>
+              <h3 className="text-dark fw-md">$ {product.price}</h3>
+            </Col>
+            <Col>
+              <Card className="hoverBlueOutline border-0">
+                <Card.Body>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <label htmlFor="address" className="form-label w-100">
+                      <p>Address :</p>
+                      <input
+                        type="text"
+                        id="address"
+                        placeholder="Address"
+                        className="input-outlined form-control mb-4"
+                        {...register("address", { required: true })}
+                      />
+                    </label>
+                    <label htmlFor="quantity" className="form-label w-100">
+                      <p>Qunatity :</p>
+                      <input
+                        type="number"
+                        id="quantity"
+                        min={1}
+                        defaultValue={1}
+                        placeholder="Quantity"
+                        className="input-outlined form-control mb-4"
+                        {...register("quantity", { required: true })}
+                      />
+                    </label>
+                    {/* errors will return when field validation fails  */}
+                    {errors.exampleRequired && (
+                      <p className="text-danger">This field is required</p>
+                    )}
 
-                  <ButtonC type="submit" className="mb-4 rounded-3">
-                    Place Order
-                  </ButtonC>
-                </form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-          ):(<SingleProductSkeleton/>)
-        }
+                    <ButtonC type="submit" className="mb-4 rounded-3">
+                      Place Order
+                    </ButtonC>
+                  </form>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        ) : (
+          <SingleProductSkeleton />
+        )}
         {/* alart */}
         <ToastContainer
           position="bottom-center"

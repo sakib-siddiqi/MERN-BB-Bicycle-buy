@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-function confirmIt(do_it, { text, confirmButtonText, result }) {
+function confirmIt(do_it, { text, confirmButtonText, final }) {
   /**alart */
   try {
     Swal.fire({
@@ -13,7 +13,7 @@ function confirmIt(do_it, { text, confirmButtonText, result }) {
     }).then((result) => {
       console.log(result);
       if (result.isConfirmed) {
-        Swal.fire(result, "You will be loged out", "success");
+        Swal.fire(final, "You will be loged out", "success");
         do_it();
       }
     });

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Table } from "react-bootstrap";
@@ -11,7 +10,6 @@ import DashTitle from "../../DashTitle";
 const AllOrders = () => {
   const { firebase } = useAuth();
   const [allOrders, setAllOrders] = useState([]);
-  const [posted, setPosted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -42,12 +40,16 @@ const AllOrders = () => {
         }
       )
       .then((res) => {
-        setPosted(res.data.acknowledged);
+        if (res.data.acknowledged) {
+          const approvedOrder = allOrders.find((order) => order._id === id);
+          const othreOrders = allOrders.filter((order) => order._id !== id);
+          approvedOrder.status = "shipped";
+          setAllOrders([approvedOrder,...othreOrders  ]);
+        }
         setError("");
       })
       .catch((err) => setError(err.code));
   }
-
   return (
     <section>
       <DashTitle bg="#B980F040" text="dark">
@@ -85,7 +87,7 @@ const AllOrders = () => {
                   <td>{order.date}</td>
                   {/* Status */}
                   <td>
-                    {order.status === "shipped" || posted ? (
+                    {order.status === "shipped" ? (
                       <Button size="sm" variant="primary" disabled>
                         Shipped
                       </Button>

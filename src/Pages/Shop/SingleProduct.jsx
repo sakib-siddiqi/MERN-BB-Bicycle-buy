@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/Firebase/useAuth";
 import ButtonC from "../../Shared/Components/Buttons/ButtonC";
 import Page from "../../Shared/Page/Page";
 import PageHeader from "../../Shared/Page/PageHeader";
+import { SingleProductSkeleton } from "../../Shared/Skelaton/SkeletonLoading";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -61,7 +62,9 @@ const SingleProduct = () => {
         </h1>
       </PageHeader>
       <Container className="my-5 ">
-        <Row xs={1} md={2} className="g-4">
+        {
+          product._id?(
+            <Row xs={1} md={2} className="g-4">
           <Col>
             <img src={product.img_link} alt={product.route} className="w-100" />
             <p className="text-secondary mt-3">{product.details}</p>
@@ -106,6 +109,8 @@ const SingleProduct = () => {
             </Card>
           </Col>
         </Row>
+          ):(<SingleProductSkeleton/>)
+        }
         {/* alart */}
         <ToastContainer
           position="bottom-center"

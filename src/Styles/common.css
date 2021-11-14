@@ -53,6 +53,9 @@
 .as-10 {
   aspect-ratio: 10/2;
 }
+.as-16 {
+  aspect-ratio: 16/9;
+}
 /* outlined img */
 .outlineed-img {
   outline: 2px solid rgba(var(--dark), 0.2);

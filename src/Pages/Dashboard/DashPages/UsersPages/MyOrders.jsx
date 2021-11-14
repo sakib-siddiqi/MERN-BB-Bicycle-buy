@@ -7,7 +7,11 @@ import confirmIt from "../../../../Shared/Components/Alart_Confirm/confirmIt";
 import { TableSkeleton } from "../../../../Shared/Skelaton/SkeletonLoading";
 import DashBoardContent from "../../DashBoardContent";
 import DashTitle from "../../DashTitle";
-
+/**
+ * 
+ * Single user product
+ * 
+ */
 const MyOrders = () => {
   const { firebase } = useAuth();
   const [myOrders, setMyOrders] = useState([]);

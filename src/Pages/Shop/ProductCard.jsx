@@ -8,7 +8,12 @@ const ProductCard = ({
 }) => {
   return (
     <Card className="border-0 product-card">
-      <Card.Img variant="top" src={img_link} className="rounded-0" />
+      <Card.Img
+        variant="top"
+        src={img_link}
+        className="rounded-0 as-16"
+        style={{ objectFit: "cover" }}
+      />
       <Card.Body>
         <Card.Title className="fw-md ls-1">{product_name}</Card.Title>
         <Card.Text as={Text}>{details}</Card.Text>

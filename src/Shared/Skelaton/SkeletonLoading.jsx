@@ -62,6 +62,25 @@ const TableSkeleton = ({ row, col }) => {
     </>
   );
 };
+
+const SingleProductSkeleton = () => {
+  return (
+    <Row xs={1} md={2} className="g-4">
+      <Col>
+        <Skeleton height="300px" />
+        <Skeleton count={3} />
+      </Col>
+      <Col>
+        <Skeleton height={10} />
+        <Skeleton height={30} className="mb-3" />
+        <Skeleton height={10} />
+        <Skeleton height={30} className="mb-3" />
+        <Skeleton height={30} width="25%" />
+      </Col>
+    </Row>
+  );
+};
+
 const SiteSkeleton = ({ row, col }) => {
   return (
     <Container>
@@ -103,4 +122,5 @@ export {
   TableSkeleton,
   SiteSkeleton,
   ProductsSkeleton,
+  SingleProductSkeleton
 };

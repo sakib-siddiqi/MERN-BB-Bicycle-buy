@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 function confirmIt(do_it, { text, confirmButtonText, result }) {
+  /**alart */
   try {
     Swal.fire({
       title: "Are you sure?",

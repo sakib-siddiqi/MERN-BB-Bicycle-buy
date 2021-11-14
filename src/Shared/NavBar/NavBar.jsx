@@ -5,7 +5,11 @@ import { IoGridSharp } from "react-icons/io5";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useAuth from "../../Hooks/Firebase/useAuth";
 import confirmIt from "../Components/Alart_Confirm/confirmIt";
-
+/**
+ * 
+ * Navbar
+ * 
+ */
 const NavItem = ({ children, ...rest }) => {
   return (
     <Nav.Link
@@ -28,7 +32,7 @@ const NavBar = () => {
       <Container>
         <Navbar.Brand as={NavLink} exact to="/">
           <img
-            src="./Logo.png"
+            src="/Logo.png"
             alt="B.B"
             className="rounded-3"
             style={{ maxWidth: "35px" }}

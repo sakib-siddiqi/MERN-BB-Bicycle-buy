@@ -9,6 +9,7 @@ import LoginSign from "./Pages/Login-Signup/LoginSign";
 import Shop from "./Pages/Shop/Shop";
 import SingleProduct from "./Pages/Shop/SingleProduct";
 import { SiteSkeleton } from "./Shared/Skelaton/SkeletonLoading";
+import NotFound from "./Shared/404/NotFound";
 function App() {
   const { firebase } = useFirebase();
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/shop/:id" component={SingleProduct} />
               <Route path="/login-signup" component={LoginSign} />
               <Route path="/dashboard" component={Dashboard} />
+              <Route path="*" component={NotFound} />
             </Switch>
           </BrowserRouter>
         </AuthCotext>

@@ -10,6 +10,7 @@ import Shop from "./Pages/Shop/Shop";
 import SingleProduct from "./Pages/Shop/SingleProduct";
 import { SiteSkeleton } from "./Shared/Skelaton/SkeletonLoading";
 import NotFound from "./Shared/404/NotFound";
+import PrivateRoute from "./Shared/PrivateRoutes/PrivateRoute";
 function App() {
   const { firebase } = useFirebase();
   return (
@@ -22,7 +23,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/shop" component={Shop} />
-              <Route path="/shop/:id" component={SingleProduct} />
+              <PrivateRoute path="/shop/:id"><SingleProduct/></PrivateRoute>
               <Route path="/login-signup" component={LoginSign} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="*" component={NotFound} />
